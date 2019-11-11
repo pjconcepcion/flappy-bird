@@ -14,8 +14,11 @@ class GameManager:
         self._is_game_over = False
         self._score = 0
         self._score_multiplier = 1
-        self._scoreText = Text('Score',':','0',size=20,left=10,top=self._screen.get_height() - 30)
+        self._score_multiply = False
+        self._scoreText = Text('Score',':',self._score,size=20,left=10,top=self._screen.get_height() - 30)
         self._screen.add_surface('score_text',self._scoreText)
+        self._player.set_location(left=10,top=self._screen.get_height() // 2)
+        self._player.set_rect(left=10,top=self._screen.get_height() // 2,width=40,height=30)
 
     def spawn_pipe(self):
         game_area_height = self._screen.get_height() - self._screen.get_floor().get_height()
@@ -83,10 +86,10 @@ class GameManager:
 
                 if (pipe.get_rect().colliderect(self._player.get_rect())):
                     if (name == f'pass_area-{key}'):
-                        self._score += 1 * self._score_multiplier
+                        self._score += (1 * self._score_multiplier)
                         self._scoreText.set_text(score=self._score)
                         self._screen.remove_surface(name)
-                        del self._pipe_list[key][name]
+                        del self._pipe_list[key][name]                        
                     else:
                         self._is_game_over = True
 
@@ -103,8 +106,9 @@ class GameManager:
                 self._spawn_rate = random.uniform(1,2.75)
                 self._spawn_time = time.time() + self._spawn_rate
 
-            if (self._score > 15 or self._score > 30):
+            if ((self._score == 30) and self._score_multiply == False):
                 self._score_multiplier += 1
+                self._score_multiply = True
 
             self.move_pipe()
 
