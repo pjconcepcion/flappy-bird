@@ -2,7 +2,7 @@
 My own version of flappy bird developed using pygame. Same mechanics as the original.
 
 ## Objective
-Don't get hit by the pipes.
+Don't get hit in the pipes.
 
 ## How-to-run
 1. Download or git clone the repository.
