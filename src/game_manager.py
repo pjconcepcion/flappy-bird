@@ -92,6 +92,13 @@ class GameManager:
                         del self._pipe_list[key][name]                        
                     else:
                         self._is_game_over = True
+                        self._gameOverText = Text(title='Game Over',size=25,left=self._screen.get_width() / 2 - 50,top=self._screen.get_height() / 3)
+                        self._quitText = Text(title='ESC ',separator='-',score=' Quit',size=25,left=self._screen.get_width() / 2 - 50, top=self._screen.get_height() / 3 + 25)
+                        self._restartText = Text(title='R ',separator='-',score=' Restart',size=25,left=self._screen.get_width() / 2 - 50, top=self._screen.get_height() / 3 + 50)
+
+                        self._screen.add_surface('gameOverText',self._gameOverText)
+                        self._screen.add_surface('quitText',self._quitText)
+                        self._screen.add_surface('restartText',self._restartText)
 
         if (self._player.get_rect().colliderect(self._screen.get_floor().get_rect())):
             self._is_game_over = True
